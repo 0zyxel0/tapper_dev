@@ -82,7 +82,7 @@
                 $('#dataTables').DataTable().ajax.reload();
             }
 function hideDetails(){
-    var interval = 4000;
+    var interval = 7000;
     $('#changing').css('opacity',100);
     setTimeout(function () {
         $('#changing').css('opacity',0);
@@ -101,7 +101,9 @@ function hideDetails(){
                                 if (data == null)
                                 {
                                     return ' ';
-                                }else return '<img src="<?php echo base_url()?>'+data+'" height="100px" width="100px" style="text-align:center;">';
+                                }
+                                else
+                                    return '<img src="<?php echo base_url()?>'+data+'" height="100px" width="100px" style="text-align:center;">';
                             }
                         }],
                 "bFilter": false,
@@ -171,6 +173,7 @@ function hideDetails(){
                     <thead>
                     <tr>
                         <th style="display: none;">url</th>
+                        <th style="display: none;">TimeIn</th>
                     </tr>
                     </thead>
                 </table>

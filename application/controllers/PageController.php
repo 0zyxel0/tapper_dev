@@ -69,6 +69,12 @@ class PageController extends CI_Controller {
         echo $json;
     }
 
+    public function getLogoSettings(){
+	    $this->load->helper('url');
+
+	    $this->load->view("manageLogoPage");
+    }
+
 
 
 
@@ -634,7 +640,8 @@ class PageController extends CI_Controller {
         foreach($x->result() as $r) {
 
             $data[] = array(
-                $r->url
+                $r->url,
+                $r->TimeIn
             );
         }
 

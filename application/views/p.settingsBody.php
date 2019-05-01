@@ -46,17 +46,17 @@
                                 <div class="panel-heading cb" id="AddCoursetab">
                                     <div class="row">
                                         <div class="col-xs-3">
-                                            <i class="fa fa-user fa-5x"></i>
+                                            <i class="fa fa-image fa-5x"></i>
                                         </div>
                                         <div class="col-xs-9 text-right">
                                             <div class="huge">+</div>
-                                            <div>Add Course</div>
+                                            <div>Change Logo</div>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#" data-toggle="modal">
+                                <a href="<?php echo base_url(); ?>PageController/getLogoSettings" data-toggle="modal">
                                     <div class="panel-footer">
-                                        <span class="pull-left">Add Course</span>
+                                        <span class="pull-left">Change Logo</span>
                                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                         <div class="clearfix"></div>
                                     </div>

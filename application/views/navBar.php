@@ -66,14 +66,14 @@
 
 
                         <li>
-                            <a href="<?php echo base_url(); ?>PageController/guardianList"><i class="fa fa-github-alt fa-fw"></i>Guardian List<span class="fa arrow"></span></a>
+                            <a href="<?php echo base_url(); ?>PageController/guardianList"><i class="fa fa-users fa-fw"></i>Guardian List<span class="fa arrow"></span></a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url(); ?>PageController/UserCategoryList"><i class="fa fa-github-alt fa-fw"></i>Category List<span class="fa arrow"></span></a>
+                            <a href="<?php echo base_url(); ?>PageController/UserCategoryList"><i class="fa fa-user-times fa-fw"></i>Category List<span class="fa arrow"></span></a>
                         </li>
-                        <!-- <li>
-                            <a href="<?php echo base_url(); ?>PageController/sysSettings"><i class="fa fa-github-alt fa-fw"></i>System Setup<span class="fa arrow"></span></a>
-                        </li> -->
+                        <li>
+                            <a href="<?php echo base_url(); ?>PageController/sysSettings"><i class="fa fa-cogs fa-fw"></i>System Setup<span class="fa arrow"></span></a>
+                        </li>
 
 
                     </ul>
