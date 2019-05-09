@@ -15,12 +15,13 @@
     <?php require('ScriptBundle.php')?>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#changing').css('opacity', 0);
+            var myTimers;
+         //   $('#changing').css('opacity', 0);
             $('#cardScan').on('submit',function(e){
                 var post_data1 = $('#crdScanned').val();
                 var post_data2 = $('#gateStationId').val();
-                $("#hotreload")[0].contentWindow.document.getElementById('crdScanned').value = post_data1;
-                $("#hotreload")[0].contentWindow.document.getElementById('btn_pass').click();
+                $(".hotreload")[0].contentWindow.document.getElementById('crdScanned').value = post_data1;
+                $(".hotreload")[0].contentWindow.document.getElementById('btn_pass').click();
                 $.ajax({
                     url: "<?php echo site_url('DataController/checkCardDetails'); ?>",
                     type: 'POST',
@@ -79,13 +80,20 @@
                 });
                 hideDetails();
               //  setTimeout(reloadIFrame(), 4000);
+                //call reload for the whole page...what i need to do it call the timer after 4 seconds or if someone taps again it cancels the timer and 
                 $('#dataTables').DataTable().ajax.reload();
+                setTimeout(reload_page(), 4000);
+            }
+
+            function reload_page(){
+               return document.location.reload(true)
             }
 function hideDetails(){
-    var interval = 7000;
-    $('#changing').css('opacity',100);
-    setTimeout(function () {
-        $('#changing').css('opacity',0);
+    clearTimeout(myTimers);
+    var interval = 5000;
+    //$('#changing').css('opacity',100);
+    myTimers = setTimeout(function () {
+     //   $('#changing').css('opacity',0);
     }, interval);
 };
             $('#dataTables').DataTable({
@@ -159,9 +167,12 @@ function hideDetails(){
                             <!-- /.table-responsive -->
                             </div>
                             <form id="cardScan" method="post" autocomplete="off">
-                            <input name="crdScanned" id="crdScanned" value=""  maxlength="10" style=" background: transparent;border: solid; color:#f8f8f8; width:500px;   outline-width: 0;"  autofocus>
-                            <input class="form-control"  name="gateStationId" id="gateStationId" value="GTONE" type="hidden" autofocus>
-                            <button id="btnCheck" class="btn btn-primary btn-lg btn-block" style="display: none;">check</button>
+                            <input name="crdScanned" id="crdScanned" value=""  maxlength="10" autofocus>
+<!--                                <input name="crdScanned" id="crdScanned" value=""  maxlength="10" style=" background: transparent;border: solid; color:#f8f8f8; width:500px;   outline-width: 0;"  autofocus>-->
+                            <input class="form-control"  name="gateStationId" id="gateStationId" value="GTONE" autofocus>
+<!--                                <input class="form-control"  name="gateStationId" id="gateStationId" value="GTONE" type="hidden" autofocus>-->
+                            <button id="btnCheck" class="btn btn-primary btn-lg btn-block">check</button>
+<!--                                <button id="btnCheck" class="btn btn-primary btn-lg btn-block" style="display: none;">check</button>-->
                             </form>
                 </div>
             </div>
@@ -181,8 +192,11 @@ function hideDetails(){
         </div> <!--./col-->
     </div>
     <div class="row">
-        <iframe id="hotreload" src="<?php echo site_url('PageController/loader');?>" style="opacity: 0">
+        <iframe class="hotreload" src="<?php echo site_url('PageController/loader');?>">
         </iframe>
+<!---->
+<!--        <iframe id="hotreload" src="--><!--" style="opacity: 0">-->
+<!--        </iframe>-->
     </div>
 </body>
 </html>
