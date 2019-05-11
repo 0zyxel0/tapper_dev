@@ -25,8 +25,7 @@
                 var post_data2 = $('#gateStationId').val();
                 $(".hotreload")[0].contentWindow.document.getElementById('crdScanned').value = post_data1;
                 $(".hotreload")[0].contentWindow.document.getElementById('btn_pass').click();
-                var iframe = document.getElementById('hotreload');
-                iframe.src = iframe.src;
+
                 $.ajax({
                     url: "<?php echo site_url('DataController/checkCardDetails'); ?>",
                     type: 'POST',
@@ -40,12 +39,14 @@
                         console.log(post_data1);
                         refresh();
                         console.log(data);
+
                     }
                 });return false;
             });
             var reloadIFrame = function () {
-                document.frames["hotreload"].location.reload();
-                console.log('refresh');
+                var iframe = document.getElementById('hotreload').onload = function() {
+                    iframe.src = iframe.src
+                };
             }
             var sendSMSNotification= function(){
                 $.ajax({
@@ -85,7 +86,7 @@
                     }
                 });
                 hideDetails();
-              //  setTimeout(reloadIFrame(), 4000);
+                setTimeout(reloadIFrame(), 4000);
                 //call reload for the whole page...what i need to do it call the timer after 4 seconds or if someone taps again it cancels the timer and 
                 $('#dataTables').DataTable().ajax.reload();
                // setTimeout(reload_page(), 4000);
@@ -198,7 +199,7 @@ function hideDetails(){
         </div> <!--./col-->
     </div>
     <div class="row">
-        <iframe class="hotreload" id="hotreload" src="<?php echo site_url('PageController/loader');?>" style="opacity: 0">
+        <iframe class="hotreload" id="hotreload" src="<?php echo site_url('PageController/loader');?>" >
         </iframe>
 
     </div>

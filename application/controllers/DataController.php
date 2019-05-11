@@ -694,8 +694,8 @@ class DataController extends CI_Controller{
     }
 
 public function ctl_buildSmsNotification(){
+    $this->load->helper('url');
     $cardId =$this->input->post('crdScanned');
-    //$cardId = '2345243523';
     $data = $this->DataModel->mdl_getGuardianNumber($cardId);
     $data2 = $this->DataModel->mdl_studentFamilyname($cardId);
     $data3 = $this->DataModel->mdl_studentGivenname($cardId);
@@ -730,6 +730,8 @@ public function ctl_buildSmsNotification(){
             );
 
             $this->DataModel->mdl_addPendingSms($post_smsPush);
+            redirect(site_url('PageController/loader'));
+
         }
         elseif($ustat == 1){
             $temptype = 2;
@@ -746,8 +748,12 @@ public function ctl_buildSmsNotification(){
                 'updatedon' =>date('Y-m-d H:i:s')
             );
             $this->DataModel->mdl_addPendingSms($post_smsPush);
+            redirect(site_url('PageController/loader'));
+
         }
-    }
+
+ redirect(site_url('PageController/loader'));
+}
 //Contact List
 
 public function ctl_deleteContactList(){
