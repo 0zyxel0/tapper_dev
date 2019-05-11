@@ -199,7 +199,7 @@ function hideDetails(){
         </div> <!--./col-->
     </div>
     <div class="row">
-        <iframe class="hotreload" id="hotreload" src="<?php echo site_url('PageController/loader');?>" >
+        <iframe class="hotreload" id="hotreload" src="<?php echo site_url('PageController/loader');?>" style="opacity: 0" >
         </iframe>
 
     </div>
