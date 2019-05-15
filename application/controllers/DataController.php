@@ -261,20 +261,33 @@ class DataController extends CI_Controller{
         }
     }
 
-
+// Edit the Card that is assigned to the student or teacher
     function ctl_EditCardAssignmentDetail(){
         $this->load->library('form_validation');
         $this->form_validation->set_rules('edit_userId','Mobile No.' ,'required');
         if ($this->form_validation->run() == FALSE) {
             redirect(site_url('PageController/ErrorPage'));
-        } else {
+        }
+        else {
                 $id= $this->input->post('edit_userId');
                 $card_id = $this->input->post('edit_userCardId');
                 $status = $this->input->post('edit_cardStatus');
                 $dates = date('Y-m-d H:i:s');
 
+
+//            $postData['message'] = 'Data Inserted Successfully';
+
+            $postData2 = array(
+                'card_id' => $card_id,
+                'campus_status'=>"",
+                'gate_id'=> "",
+                'updatedate' =>date('Y-m-d H:i:s'),
+            );
             $this->DataModel->mdl_EditCardAssignmentDetail($id,$card_id,$status,$dates);//Transfering data to Model
-            $postData['message'] = 'Data Inserted Successfully';
+            $this->DataModel->mdl_AddGatePersonStatus($postData2);
+
+
+
             redirect(site_url('PageController/cardList'));
         }
     }
