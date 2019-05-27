@@ -46,9 +46,12 @@
                                 <div class="panel-body">
 
                                     <label for="currentHeader" class="form-group">Current Header Title</label>
-                                    <?php foreach ($data as $item):?>
-                                        <li><?php echo $item;?></li>
-                                    <?php endforeach;?>
+                                    <?php
+                                    foreach ($title as $obj)
+                                    {
+                                        echo $obj->header_name;
+                                    }
+                                    ?>
                                     <input class="form-control" placeholder="First Name" name="record_givenName" id="record_givenName" value="" autocomplete="false">
 
                                 </div>

@@ -791,7 +791,6 @@ class PageController extends CI_Controller {
     {
         $this->load->helper('url');
         $data['title'] = $this->DataModel->mdl_getHeaderName();
-
         $this->load->view('headerSettingPage',$data);
     }
 

@@ -535,7 +535,8 @@ class DataModel extends CI_Model{
                                    FROM header_settings
                                    WHERE 1                               
                                   ');
-        return  $title->result();
+        $res   = $title->result();
+        return $res;
     }
 
 
