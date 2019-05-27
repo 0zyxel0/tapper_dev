@@ -60,6 +60,14 @@ class PageController extends CI_Controller {
 		$this->load->view("userScan", $data);
 	}
 
+	public function getHeaderTitle(){
+        $this->load->helper('url');
+        $data = $this->DataModel->mdl_getHeaderName();
+        echo json_encode($data);
+
+
+    }
+
     public function getRecentGateTopUp()
     {
         $this->load->helper('url');
@@ -627,6 +635,7 @@ class PageController extends CI_Controller {
     }
 
 
+
     function ctl_getUserImageTimeline(){
         // Datatables Variables
         $draw = intval($this->input->get("draw"));
@@ -777,6 +786,15 @@ class PageController extends CI_Controller {
         $this->load->helper('url');
         $this->load->view('settingsPage');
     }
+
+    public function getHeaderSettings()
+    {
+        $this->load->helper('url');
+        $data['title'] = $this->DataModel->mdl_getHeaderName();
+
+        $this->load->view('headerSettingPage',$data);
+    }
+
     public function guardianList()
     {
         $this->load->helper('url');

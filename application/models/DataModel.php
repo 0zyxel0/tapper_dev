@@ -530,6 +530,13 @@ class DataModel extends CI_Model{
         $this->db->insert('bulknotification_activities', $data);
     }
 
+    public function mdl_getHeaderName(){
+        $title = $this->db->query('Select header_name 
+                                   FROM header_settings
+                                   WHERE 1                               
+                                  ');
+        return  $title->result();
+    }
 
 
     public function mdl_AddGatePersonStatus($postData){
