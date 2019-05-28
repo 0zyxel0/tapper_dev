@@ -38,22 +38,42 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-12">
-                                <h1 class="page-header">Manage System Header</h1>
+                                <h3 class="page-header">Manage System Header</h3>
                             </div>
                         <div class="row">
                             <div class="col-md-6">
                             <div class="panel">
                                 <div class="panel-body">
 
-                                    <label for="currentHeader" class="form-group">Current Header Title</label>
-                                    <?php
-                                    foreach ($title as $obj)
-                                    {
-                                        echo $obj->header_name;
-                                    }
-                                    ?>
-                                    <input class="form-control" placeholder="First Name" name="record_givenName" id="record_givenName" value="" autocomplete="false">
 
+                                    <?php
+                                    if(isset($title)){
+                                        foreach ($title as $obj)
+                                        {
+                                           echo '<span style="font-size: 20px">Current System Header : '; echo $obj->header_name;
+                                            echo '</span>';
+
+                                        }
+                                    }
+                                    else{
+                                        return "";
+                                    }
+
+                                    ?>
+
+
+
+                                </div>
+                                <div class="panel-footer">
+                                <h3>Update Header</h3>
+                                    <hr>
+                                <form method="post" action="<?= site_url('DataController/ctl_editSystemHeader') ?>">
+                                <input class="form-control" placeholder="Input New Header Title" name="p_header" id="p_header" value="" autocomplete="false">
+                                    <br>
+
+                                    <input class="btn btn-primary" type="submit" value="Save">
+
+                                </form>
                                 </div>
                             </div>
                             </div>

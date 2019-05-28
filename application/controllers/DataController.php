@@ -261,6 +261,21 @@ class DataController extends CI_Controller{
         }
     }
 
+
+    function ctl_editSystemHeader(){
+        $postData = array(
+            'header_name' => $this->input->post('p_header'),
+            'updatedby' => $this->session->userdata('username'),
+            'updatedat' => date('Y-m-d H:i:s')
+        );
+        $this->DataModel->mdl_editSystemHeader($postData);//Transfering data to Model
+        $postData['message'] = 'Data Inserted Successfully';
+        redirect(site_url('PageController/getHeaderSettings'));
+    }
+
+
+
+
 // Edit the Card that is assigned to the student or teacher
     function ctl_EditCardAssignmentDetail(){
         $this->load->library('form_validation');

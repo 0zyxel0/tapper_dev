@@ -539,6 +539,11 @@ class DataModel extends CI_Model{
         return $res;
     }
 
+    function mdl_editSystemHeader($postData){
+        $this->db->where('id', 1);
+        $this->db->update('header_settings', $postData);
+    }
+
 
     public function mdl_AddGatePersonStatus($postData){
         $this->db->insert('gate_personstatus',$postData);

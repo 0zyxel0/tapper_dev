@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2019 at 11:23 PM
+-- Generation Time: May 28, 2019 at 11:48 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 5.6.38
 
@@ -284,15 +284,6 @@ CREATE TABLE `bulknotification_activities` (
   `updatedon` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `bulknotification_activities`
---
-
-INSERT INTO `bulknotification_activities` (`id`, `sms_to`, `message`, `sms_status`, `createdon`, `updatedon`) VALUES
-(10, '123123123', '2019-04-29 00:59:01 , asdf , asdf is now going outside of the campus premises. This is a system generated message.', 'Pending', '2019-04-28 22:59:01', '2019-04-28 22:59:01'),
-(11, '123123123', '2019-04-29 00:59:43 , asdf , asdf has walked in to the campus premises. This is a system generated message.', 'Pending', '2019-04-28 22:59:43', '2019-04-28 22:59:43'),
-(12, '123123123', '2019-04-29 04:14:23 , asdf , asdf is now going outside of the campus premises. This is a system generated message.', 'Pending', '2019-04-29 02:14:23', '2019-04-29 02:14:23');
-
 -- --------------------------------------------------------
 
 --
@@ -364,13 +355,6 @@ CREATE TABLE `gate_cardassignment` (
   `isDisabled` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `gate_cardassignment`
---
-
-INSERT INTO `gate_cardassignment` (`assignmentId`, `partyId`, `card_id`, `categoryId`, `createdBy`, `createDate`, `updateDate`, `isDisabled`) VALUES
-('1d6a7f2f-6937-11e9-be11-0c9d92ccf6c2', 'dafdb8a8-6934-11e9-be11-0c9d92ccf6c2', '231564987', '77f9afea-c316-11e8-a587-ace2d3624318', 'Admin', '2019-04-28 05:55:04', '2019-04-28 05:55:04', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -392,7 +376,7 @@ CREATE TABLE `gate_categorytype` (
 --
 
 INSERT INTO `gate_categorytype` (`categoryId`, `categoryType`, `categoryName`, `gateTimeInSetting`, `gateTimeSettingAbsent`, `createdBy`, `updateDate`) VALUES
-('77f9afea-c316-11e8-a587-ace2d3624318', 'STD', 'Student', '09:00:00', '12:00:00', 'Admin', '2018-09-28 14:03:10'),
+('77f9afea-c316-11e8-a587-ace2d3624318', 'STD', 'Student', '09:00:00', '00:00:00', 'Admin', '2019-02-12 07:48:57'),
 ('88591e2d-c316-11e8-a587-ace2d3624318', 'TCH', 'Teacher', '09:00:00', '13:00:00', 'Admin', '2018-09-28 14:03:37');
 
 -- --------------------------------------------------------
@@ -422,15 +406,6 @@ CREATE TABLE `gate_history` (
   `gate_id` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `gate_history`
---
-
-INSERT INTO `gate_history` (`transaction_id`, `card_id`, `createDate`, `gate_id`) VALUES
-(16, '231564987', '2019-04-29 00:59:00', 'GTONE'),
-(17, '231564987', '2019-04-29 00:59:42', 'GTONE'),
-(18, '231564987', '2019-04-29 04:14:23', 'GTONE');
-
 -- --------------------------------------------------------
 
 --
@@ -454,13 +429,6 @@ CREATE TABLE `gate_persondetails` (
   `updateDate` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `gate_persondetails`
---
-
-INSERT INTO `gate_persondetails` (`personDetailId`, `userGivenId`, `familyname`, `givenname`, `middlename`, `suffix`, `civilStatus`, `gender`, `mobile_number`, `dateOfBirth`, `age`, `categoryId`, `createdBy`, `updateDate`) VALUES
-('dafdb8a8-6934-11e9-be11-0c9d92ccf6c2', 'asdfc', 'asdf', 'asdf', 'asdf', 'a', 'Single', 'Male', '12345678911', '2001-04-03', 18, '77f9afea-c316-11e8-a587-ace2d3624318', 'Admin', '2019-04-28 05:38:54');
-
 -- --------------------------------------------------------
 
 --
@@ -476,13 +444,6 @@ CREATE TABLE `gate_personphoto` (
   `updateDate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `gate_personphoto`
---
-
-INSERT INTO `gate_personphoto` (`photoId`, `personDetailId`, `image_url`, `createdBy`, `createDate`, `updateDate`) VALUES
-('ed20bc76-6935-11e9-be11-0c9d92ccf6c2', 'dafdb8a8-6934-11e9-be11-0c9d92ccf6c2', 'ui/photo_library/hd-wallpaper-8.jpg', 'Admin', '2019-04-28 05:46:34', '2019-04-28 05:46:34');
-
 -- --------------------------------------------------------
 
 --
@@ -496,15 +457,6 @@ CREATE TABLE `gate_personstatus` (
   `gate_id` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `updatedate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `gate_personstatus`
---
-
-INSERT INTO `gate_personstatus` (`gate_personstatusid`, `card_id`, `campus_status`, `gate_id`, `updatedate`) VALUES
-(1, 'ghghnghn', 0, '', '2019-02-12 00:36:04'),
-(2, '5467456754', 1, '', '2019-02-25 20:43:50'),
-(3, '231564987', 0, '', '2019-04-28 22:14:23');
 
 -- --------------------------------------------------------
 
@@ -537,14 +489,25 @@ CREATE TABLE `gate_users` (
   `updatedBy` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `gate_users`
+-- Table structure for table `header_settings`
 --
 
-INSERT INTO `gate_users` (`id_user`, `username`, `password`, `createdDate`, `createdBy`, `updateDate`, `updatedBy`) VALUES
-(1, 'Admin', 'pass', '2017-09-28', 'Admin', '2017-09-28', 'Admin'),
-(2, 'Gate', 'pass', '2017-09-28', 'Admin', '2017-09-28', 'Admin'),
-(3, 'SmsAdmin', 'pass', '2017-09-28', 'Admin', '2017-09-28', 'Admin');
+CREATE TABLE `header_settings` (
+  `id` int(11) NOT NULL,
+  `header_name` varchar(255) COLLATE utf8_bin NOT NULL,
+  `updatedat` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updatedby` varchar(100) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `header_settings`
+--
+
+INSERT INTO `header_settings` (`id`, `header_name`, `updatedat`, `updatedby`) VALUES
+(1, 'xcvb', '2019-05-29 03:46:31', 'Admin');
 
 -- --------------------------------------------------------
 
@@ -661,6 +624,13 @@ CREATE TABLE `sms_settings` (
   `ipaddress` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `sms_settings`
+--
+
+INSERT INTO `sms_settings` (`id`, `ipaddress`) VALUES
+(1, '192.168.1.7:8080');
+
 -- --------------------------------------------------------
 
 --
@@ -722,13 +692,6 @@ CREATE TABLE `user_emergencycontact` (
   `updateDate` datetime NOT NULL,
   `personDetailId` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `user_emergencycontact`
---
-
-INSERT INTO `user_emergencycontact` (`contactId`, `contactName`, `contactRelationship`, `contactNumber`, `createDate`, `createdBy`, `updateDate`, `personDetailId`) VALUES
-('a2f2001f-6938-11e9-be11-0c9d92ccf6c2', 'asdf', 'asdf', '123123123', '2019-04-28 06:05:57', 'Admin', '2019-04-28 06:05:57', 'dafdb8a8-6934-11e9-be11-0c9d92ccf6c2');
 
 --
 -- Indexes for dumped tables
@@ -824,6 +787,12 @@ ALTER TABLE `gate_users`
   ADD UNIQUE KEY `partyid` (`id_user`);
 
 --
+-- Indexes for table `header_settings`
+--
+ALTER TABLE `header_settings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `msg_template`
 --
 ALTER TABLE `msg_template`
@@ -888,7 +857,7 @@ ALTER TABLE `user_emergencycontact`
 -- AUTO_INCREMENT for table `bulknotification_activities`
 --
 ALTER TABLE `bulknotification_activities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `contactlist`
@@ -906,13 +875,13 @@ ALTER TABLE `contactlist_users`
 -- AUTO_INCREMENT for table `gate_history`
 --
 ALTER TABLE `gate_history`
-  MODIFY `transaction_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `transaction_id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `gate_personstatus`
 --
 ALTER TABLE `gate_personstatus`
-  MODIFY `gate_personstatusid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `gate_personstatusid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `gate_usercategory`
@@ -924,7 +893,13 @@ ALTER TABLE `gate_usercategory`
 -- AUTO_INCREMENT for table `gate_users`
 --
 ALTER TABLE `gate_users`
-  MODIFY `id_user` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user` int(50) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `header_settings`
+--
+ALTER TABLE `header_settings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `party_stdconnector`
@@ -954,7 +929,7 @@ ALTER TABLE `sms_logs`
 -- AUTO_INCREMENT for table `sms_settings`
 --
 ALTER TABLE `sms_settings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
