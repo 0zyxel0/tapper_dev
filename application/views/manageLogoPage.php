@@ -28,7 +28,119 @@
 
         <!-- Page Content -->
         <script type= 'text/javascript'>
-            $(document).ready(function() {});
+            $(document).ready(function() {
+                $("#updateLogo").hide();
+                $("#uploadLogo").hide();
+
+                if(document.getElementById("logoContainer") !== null)
+                {
+                    $("#updateLogo").show();
+
+                }
+                else
+                {
+                    $("#uploadLogo").show();
+                }
+
+
+                $('#file-input').on('change', function(){
+                    if (window.File && window.FileReader && window.FileList && window.Blob)
+                    {
+                        $('#thumb-output').html('');
+                        var data = $(this)[0].files;
+
+                        $.each(data, function(index, file){
+                            if(/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)){
+                                var fRead = new FileReader();
+                                fRead.onload = (function(file){
+                                    return function(e) {
+                                        var img = $('<img/>').addClass('thumb').attr('src', e.target.result).css('height',200).css('width',200);
+                                        $('#thumb-output').append(img);
+                                    };
+                                })(file);
+                                fRead.readAsDataURL(file);
+                                fn_updateFileNameBox();
+                            }
+                        });
+                    }else{
+                        alert("Your browser doesn't support File API!");
+                    }
+                });
+
+
+                $('#file-input-upload').on('change', function(){
+                    if (window.File && window.FileReader && window.FileList && window.Blob)
+                    {
+                        $('#thumb-output-upload').html('');
+                        var data = $(this)[0].files;
+
+                        $.each(data, function(index, file){
+                            if(/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)){
+                                var fRead = new FileReader();
+                                fRead.onload = (function(file){
+                                    return function(e) {
+                                        var img = $('<img/>').addClass('thumb').attr('src', e.target.result).css('height',200).css('width',200);
+                                        $('#thumb-output-upload').append(img);
+                                    };
+                                })(file);
+                                fRead.readAsDataURL(file);
+                                fn_updateFileNameBoxUpload();
+                            }
+                        });
+                    }else{
+                        alert("Your browser doesn't support File API!");
+                    }
+                });
+
+
+                $('#file-input-update').on('change', function(){
+                    if (window.File && window.FileReader && window.FileList && window.Blob)
+                    {
+                        $('#thumb-output-update').html('');
+                        var data = $(this)[0].files;
+
+                        $.each(data, function(index, file){
+                            if(/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)){
+                                var fRead = new FileReader();
+                                fRead.onload = (function(file){
+                                    return function(e) {
+                                        var img = $('<img/>').addClass('thumb').attr('src', e.target.result).css('height',200).css('width',200);
+                                        $('#thumb-output-update').append(img);
+                                    };
+                                })(file);
+                                fRead.readAsDataURL(file);
+                                fn_updateFileNameBoxUpdate();
+                            }
+                        });
+                    }else{
+                        alert("Your browser doesn't support File API!");
+                    }
+                });
+
+                function fn_updateFileNameBox()
+                {
+                    var extractedFileName = document.getElementById('file-input');
+                    var cleanedExtFileName = extractedFileName.value.replace('C:\\fakepath\\', '');
+                    $('#FilePathName_edit').attr('value',cleanedExtFileName);
+
+                }
+
+                function fn_updateFileNameBoxUpload()
+                {
+                    var extractedFileName = document.getElementById('file-input-upload');
+                    var cleanedExtFileName = extractedFileName.value.replace('C:\\fakepath\\', '');
+                    $('#FilePathName_upload').attr('value',cleanedExtFileName);
+                }
+
+                function fn_updateFileNameBoxUpdate()
+                {
+                    var extractedFileName = document.getElementById('file-input-update');
+                    var cleanedExtFileName = extractedFileName.value.replace('C:\\fakepath\\', '');
+                    $('#FilePathName_update').attr('value',cleanedExtFileName);
+                }
+
+
+            });
 
 
 
@@ -39,10 +151,94 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <h1 class="page-header">Manage Logo</h1>
-                            </div>
-                        <div class="row">
+                                <!--Upload Modal body-->
 
-                        </div>
+
+                                <div class="panel">
+                                    <div class="panel-title"><h3>Current Logo </h3></div>
+                                    <div class="panel-body">
+
+                                        <?php
+                                        if(isset($logo)){
+                                            foreach ($logo as $obj)
+                                            {
+                                                echo '<img id="logoContainer" src="'; echo base_url(); echo $obj->image_url; echo '" style="width:400px; height:200px;">';
+                                            }
+                                        }
+                                        else{
+                                            return false;                                       }
+
+                                        ?>
+
+
+
+                                    </div>
+                                </div>
+
+                                        <div class="panel" id="uploadLogo">
+                                            <div class="panel-header">
+                                                <h3 class="panel-info">Upload New Photo</h3>
+
+                                            </div>
+                                            <div class="panel-body">
+                                                <div id="DataTable_dataPrompt_Fields" style="text-align: center;">
+
+
+                                                    <div id="thumb-output-upload"></div>
+                                                    <br/>
+                                                    <?php echo form_open_multipart('DataController/ctl_uploadGateLogo');?>
+                                                    <fieldset>
+
+                                                        <div class="form-group">
+                                                            <input class="form-control" placeholder="Image Filename" name="FilePathName_upload" id="FilePathName_upload" value="" readonly>
+                                                            <br/>
+                                                            <input type="file" name="userfile" id="file-input-upload"/>
+                                                        </div>
+                                                        <input id ="submit" type="submit" name="submit" value="Save" onclick="" class="btn btn-lg btn-success btn-block"/>
+                                                        <input type="button" class="remove-prepend btn btn-primary btn-block" value="Close" onclick=""  data-dismiss="modal"/>
+                                                    </fieldset>
+                                                    </form>
+                                                </div>
+
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+
+
+
+
+                                <div class="panel" id="updateLogo">
+                                    <div class="panel-header">
+                                        <h3 class="panel-info">Update Photo</h3>
+
+                                    </div>
+                                    <div class="panel-body">
+                                        <div id="DataTable_dataPrompt_Fields" style="text-align: center;">
+
+
+                                            <div id="thumb-output-update"></div>
+                                            <br/>
+                                            <?php echo form_open_multipart('DataController/ctl_updateGateLogo');?>
+                                            <fieldset>
+
+                                                <div class="form-group">
+                                                    <input class="form-control" placeholder="Image Filename" name="FilePathName_update" id="FilePathName_update" value="" readonly>
+                                                    <br/>
+                                                    <input type="file" name="userfile" id="file-input-update"/>
+                                                </div>
+                                                <input id ="submit" type="submit" name="submit" value="Save" onclick="" class="btn btn-lg btn-success btn-block"/>
+                                                <input type="button" class="remove-prepend btn btn-primary btn-block" value="Close" onclick=""  data-dismiss="modal"/>
+                                            </fieldset>
+                                            </form>
+                                        </div>
+
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                            </div>
+
                     </div>
                 </div>
         </div>

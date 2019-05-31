@@ -26,8 +26,18 @@
                 </button>
 
                 <div style="margin-left: 300px;" class="headerDiv"><a class="navbar-brand" href="<?php if($_SESSION['username']== 'Admin'){echo site_url('PageController/reporting');}elseif($_SESSION['username']=='Gate'){echo site_url('PageController/gate');}   ?>"></a></div>
-                <div style="background-color: #00CC00; margin-left:150px; width: 120px; height:150px;position:absolute;"></div>
 
+                <?php
+                if(isset($logo)){
+                    foreach ($logo as $obj)
+                    {
+                        echo '<div style="margin-left:150px; width: 120px; height:150px;position:absolute;"><img id="logoContainer" src="'; echo base_url(); echo $obj->image_url; echo '" style="width:120px; height:150px;"></div>';
+                    }
+                }
+                else{
+                    echo '<div style="background-color: #00CC00; margin-left:150px; width: 120px; height:150px;position:absolute;"></div>';                                      }
+
+                ?>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">

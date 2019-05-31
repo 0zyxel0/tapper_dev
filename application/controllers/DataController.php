@@ -307,7 +307,55 @@ class DataController extends CI_Controller{
         }
     }
 
+        function ctl_uploadGateLogo(){
 
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('FilePathName_upload','Mobile No.' ,'required');
+            $config['upload_path'] = './ui/photo_library/';
+            $config['allowed_types'] = 'jpg|gif|jpeg|png';
+            $this->load->library('upload', $config);
+
+
+            if($this->form_validation->run() == FALSE){
+                redirect(site_url('PageController/ErrorPage'));
+            }else
+            {
+
+                $imagepath = 'ui/photo_library/'.$this->input->post('FilePathName_upload');
+                $imgData = array(
+                    'image_url' => $imagepath,
+                    'created_by' => $this->session->userdata('username'),
+                    'updated_by' => $this->session->userdata('username'),
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                );
+            }
+            $this->DataModel->mdl_saveGateLogo($imgData);
+            $imgData['message'] = 'Data Inserted Successfully';
+
+            if (!$this->upload->do_upload()) {
+                $error = array('error' => $this->upload->display_errors());
+                $this->load->view('uploadTry', $error);
+
+            } else {
+                $file_data = $this->upload->data();
+                $data['img'] = base_url() . '/ui/photo_library/' . $file_data['file_name'];
+                redirect(site_url('PageController/getLogoSettings'));
+            }
+        }
+
+        function ctl_updateGateLogo(){
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('FilePathName_update','Mobile No.' ,'required');
+            if ($this->form_validation->run() == FALSE) {
+                redirect(site_url('PageController/ErrorPage'));
+            } else {
+                $imagepath = 'ui/photo_library/'.$this->input->post('FilePathName_update');
+                $this->DataModel->mdl_updateGateLogo($imagepath);//Transfering data to Model
+                $postData['message'] = 'Data Inserted Successfully';
+                redirect(site_url('PageController/getLogoSettings'));
+            }
+        }
 
 
     function ctl_EditMsgTemplateDetails(){

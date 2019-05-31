@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2019 at 11:48 PM
+-- Generation Time: May 31, 2019 at 04:47 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 5.6.38
 
@@ -489,6 +489,15 @@ CREATE TABLE `gate_users` (
   `updatedBy` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `gate_users`
+--
+
+INSERT INTO `gate_users` (`id_user`, `username`, `password`, `createdDate`, `createdBy`, `updateDate`, `updatedBy`) VALUES
+(1, 'Admin', 'pass', '2017-09-28', 'Admin', '2017-09-28', 'Admin'),
+(2, 'Gate', 'pass', '2017-09-28', 'Admin', '2017-09-28', 'Admin'),
+(3, 'SmsAdmin', 'pass', '2017-09-28', 'Admin', '2017-09-28', 'Admin');
+
 -- --------------------------------------------------------
 
 --
@@ -507,7 +516,7 @@ CREATE TABLE `header_settings` (
 --
 
 INSERT INTO `header_settings` (`id`, `header_name`, `updatedat`, `updatedby`) VALUES
-(1, 'xcvb', '2019-05-29 03:46:31', 'Admin');
+(1, 'Tapper', '2019-05-31 14:45:19', 'Admin');
 
 -- --------------------------------------------------------
 
@@ -516,7 +525,7 @@ INSERT INTO `header_settings` (`id`, `header_name`, `updatedat`, `updatedby`) VA
 --
 
 CREATE TABLE `logo_table` (
-  `logoid` varchar(100) COLLATE utf8_bin NOT NULL,
+  `logoid` int(11) NOT NULL,
   `image_url` varchar(100) COLLATE utf8_bin NOT NULL,
   `created_by` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   `updated_by` varchar(100) COLLATE utf8_bin DEFAULT NULL,
@@ -623,13 +632,6 @@ CREATE TABLE `sms_settings` (
   `id` int(11) NOT NULL,
   `ipaddress` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `sms_settings`
---
-
-INSERT INTO `sms_settings` (`id`, `ipaddress`) VALUES
-(1, '192.168.1.7:8080');
 
 -- --------------------------------------------------------
 
@@ -793,6 +795,12 @@ ALTER TABLE `header_settings`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `logo_table`
+--
+ALTER TABLE `logo_table`
+  ADD PRIMARY KEY (`logoid`);
+
+--
 -- Indexes for table `msg_template`
 --
 ALTER TABLE `msg_template`
@@ -893,13 +901,19 @@ ALTER TABLE `gate_usercategory`
 -- AUTO_INCREMENT for table `gate_users`
 --
 ALTER TABLE `gate_users`
-  MODIFY `id_user` int(50) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `header_settings`
 --
 ALTER TABLE `header_settings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `logo_table`
+--
+ALTER TABLE `logo_table`
+  MODIFY `logoid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `party_stdconnector`
@@ -929,7 +943,7 @@ ALTER TABLE `sms_logs`
 -- AUTO_INCREMENT for table `sms_settings`
 --
 ALTER TABLE `sms_settings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

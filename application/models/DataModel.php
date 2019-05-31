@@ -166,6 +166,26 @@ class DataModel extends CI_Model{
         $this->db->insert('person_image',$imgData);
     }
 
+    function mdl_saveGateLogo($data){
+        $this->db->insert('logo_table',$data);
+    }
+
+    function mdl_updateGateLogo($data){
+        $query = $this->db->query("UPDATE logo_table
+                                   SET image_url = '$data'                                  
+                                  ");
+        mysqli_query($query);
+    }
+
+    function mdl_getSystemGateLogo(){
+        $title = $this->db->query('Select image_url 
+                                   FROM logo_table
+                                   WHERE 1                               
+                                  ');
+        $res   = $title->result();
+        return $res;
+    }
+
     function mdl_uploadUserPhoto($postData){
         $this->db->set('photoId', 'UUID()', FALSE);
         $this->db->insert('gate_personphoto',$postData);
@@ -540,7 +560,6 @@ class DataModel extends CI_Model{
     }
 
     function mdl_editSystemHeader($postData){
-        $this->db->where('id', 1);
         $this->db->update('header_settings', $postData);
     }
 

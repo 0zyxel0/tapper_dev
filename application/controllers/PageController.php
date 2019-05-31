@@ -79,8 +79,9 @@ class PageController extends CI_Controller {
 
     public function getLogoSettings(){
 	    $this->load->helper('url');
+        $data['logo'] = $this->DataModel->mdl_getSystemGateLogo();
 
-	    $this->load->view("manageLogoPage");
+	    $this->load->view("manageLogoPage",$data);
     }
 
 
@@ -887,7 +888,8 @@ class PageController extends CI_Controller {
 
     public function gate(){
         $this->load->helper('url');
-		$this->load->view('gateStation');
+        $data['logo'] = $this->DataModel->mdl_getSystemGateLogo();
+		$this->load->view('gateStation',$data);
     }
 
     public function ErrorPage(){
