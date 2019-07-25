@@ -788,6 +788,12 @@ class PageController extends CI_Controller {
         $this->load->view('settingsPage');
     }
 
+    public function getBackgroundSettings(){
+	    $this->load->helper('url');
+        $data['background_img'] = $this->DataModel->mdl_getGateBackground();
+	    $this->load->view('backgroundSettingPage',$data);
+    }
+
     public function getHeaderSettings()
     {
         $this->load->helper('url');
@@ -889,6 +895,7 @@ class PageController extends CI_Controller {
     public function gate(){
         $this->load->helper('url');
         $data['logo'] = $this->DataModel->mdl_getSystemGateLogo();
+        $data['background'] = $this->DataModel->mdl_getGateBackground();
 		$this->load->view('gateStation',$data);
     }
 

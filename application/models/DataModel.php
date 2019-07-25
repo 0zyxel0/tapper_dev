@@ -170,12 +170,15 @@ class DataModel extends CI_Model{
         $this->db->insert('logo_table',$data);
     }
 
+
+
     function mdl_updateGateLogo($data){
         $query = $this->db->query("UPDATE logo_table
                                    SET image_url = '$data'                                  
                                   ");
         mysqli_query($query);
     }
+
 
     function mdl_getSystemGateLogo(){
         $title = $this->db->query('Select image_url 
@@ -185,6 +188,34 @@ class DataModel extends CI_Model{
         $res   = $title->result();
         return $res;
     }
+
+    function mdl_getGateBackground(){
+        $img = $this->db->query('
+                                    SELECT background_url
+                                    FROM background_table
+                                    WHERE 1
+                                ');
+
+        $res = $img->result();
+        return $res;
+    }
+
+
+    function mdl_saveBackgroundImage($data){
+        $this->db->insert('background_table',$data);
+    }
+
+
+
+    function mdl_updateBackgroundImage($data){
+        $query = $this->db->query("UPDATE background_table
+                                   SET background_url = '$data'                                  
+                                  ");
+        mysqli_query($query);
+    }
+
+
+
 
     function mdl_uploadUserPhoto($postData){
         $this->db->set('photoId', 'UUID()', FALSE);

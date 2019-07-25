@@ -140,10 +140,19 @@ function hideDetails(){
         }
     </style>
 </head>
-<body>
+<body style="background-image: url(<?php
+if(isset($background)){
+    foreach ($background as $obj){
+        echo base_url(); echo $obj->background_url;
+    }
+}else{
+    ' ';
+}
+
+?>);">
     <div class="wrapper">
     <?php require('navBarScanner.php')?>
-        <div class="row">
+        <div class="row" >
             <div class="col-md-4 col-md-offset-4">
                     <div class="row">
                     </div>

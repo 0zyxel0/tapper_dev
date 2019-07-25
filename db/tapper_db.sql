@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2019 at 04:47 PM
+-- Generation Time: Mar 09, 2019 at 10:34 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 5.6.38
 
@@ -223,7 +223,6 @@ left join applicant_family  af on p.personId = af.personId$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `fn_ImageGateHistory` ()  NO SQL
 select 
 pp.image_url AS 'url'
-,gh.createDate AS 'TimeIn'
 from gate_history gh
 left join gate_cardassignment ga on gh.card_id = ga.card_id
 left join gate_persondetails gd on gd.persondetailId = ga.partyid
@@ -376,7 +375,7 @@ CREATE TABLE `gate_categorytype` (
 --
 
 INSERT INTO `gate_categorytype` (`categoryId`, `categoryType`, `categoryName`, `gateTimeInSetting`, `gateTimeSettingAbsent`, `createdBy`, `updateDate`) VALUES
-('77f9afea-c316-11e8-a587-ace2d3624318', 'STD', 'Student', '09:00:00', '00:00:00', 'Admin', '2019-02-12 07:48:57'),
+('77f9afea-c316-11e8-a587-ace2d3624318', 'STD', 'Student', '09:00:00', '12:00:00', 'Admin', '2018-09-28 14:03:10'),
 ('88591e2d-c316-11e8-a587-ace2d3624318', 'TCH', 'Teacher', '09:00:00', '13:00:00', 'Admin', '2018-09-28 14:03:37');
 
 -- --------------------------------------------------------
@@ -458,6 +457,14 @@ CREATE TABLE `gate_personstatus` (
   `updatedate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `gate_personstatus`
+--
+
+INSERT INTO `gate_personstatus` (`gate_personstatusid`, `card_id`, `campus_status`, `gate_id`, `updatedate`) VALUES
+(1, 'ghghnghn', 0, '', '2019-02-12 00:36:04'),
+(2, '5467456754', 1, '', '2019-02-25 20:43:50');
+
 -- --------------------------------------------------------
 
 --
@@ -497,41 +504,6 @@ INSERT INTO `gate_users` (`id_user`, `username`, `password`, `createdDate`, `cre
 (1, 'Admin', 'pass', '2017-09-28', 'Admin', '2017-09-28', 'Admin'),
 (2, 'Gate', 'pass', '2017-09-28', 'Admin', '2017-09-28', 'Admin'),
 (3, 'SmsAdmin', 'pass', '2017-09-28', 'Admin', '2017-09-28', 'Admin');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `header_settings`
---
-
-CREATE TABLE `header_settings` (
-  `id` int(11) NOT NULL,
-  `header_name` varchar(255) COLLATE utf8_bin NOT NULL,
-  `updatedat` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updatedby` varchar(100) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Dumping data for table `header_settings`
---
-
-INSERT INTO `header_settings` (`id`, `header_name`, `updatedat`, `updatedby`) VALUES
-(1, 'Tapper', '2019-05-31 14:45:19', 'Admin');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `logo_table`
---
-
-CREATE TABLE `logo_table` (
-  `logoid` int(11) NOT NULL,
-  `image_url` varchar(100) COLLATE utf8_bin NOT NULL,
-  `created_by` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `updated_by` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -789,18 +761,6 @@ ALTER TABLE `gate_users`
   ADD UNIQUE KEY `partyid` (`id_user`);
 
 --
--- Indexes for table `header_settings`
---
-ALTER TABLE `header_settings`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `logo_table`
---
-ALTER TABLE `logo_table`
-  ADD PRIMARY KEY (`logoid`);
-
---
 -- Indexes for table `msg_template`
 --
 ALTER TABLE `msg_template`
@@ -889,7 +849,7 @@ ALTER TABLE `gate_history`
 -- AUTO_INCREMENT for table `gate_personstatus`
 --
 ALTER TABLE `gate_personstatus`
-  MODIFY `gate_personstatusid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `gate_personstatusid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `gate_usercategory`
@@ -902,18 +862,6 @@ ALTER TABLE `gate_usercategory`
 --
 ALTER TABLE `gate_users`
   MODIFY `id_user` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `header_settings`
---
-ALTER TABLE `header_settings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `logo_table`
---
-ALTER TABLE `logo_table`
-  MODIFY `logoid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `party_stdconnector`
