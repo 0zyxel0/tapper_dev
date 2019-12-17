@@ -364,8 +364,9 @@ class DataModel extends CI_Model{
 
     function mdl_GetMsgTemplateList(){
         $query = $this->db->query("select
-                                    messageId AS 'Id',
+                                    messageId AS 'Id',                                  
                                     message_type AS 'Type',
+                                    msg_intro AS 'Intro',
                                     msg_text AS 'Text',
                                     updatedBy As 'By',
                                     updateDate as 'date'

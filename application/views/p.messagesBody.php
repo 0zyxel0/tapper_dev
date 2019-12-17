@@ -11,18 +11,20 @@
          "ajax": {
          url : "<?php echo site_url("PageController/ctl_GetMsgTemplateList") ?>",
          type : 'GET'
-         },"columnDefs": [
+         },"columnDefs":[
                {
-                   "targets": 0,
+                   "targets": 2,
                    "visible": false,
                    "searchable": false
                },
+               {
+                   "targets": 6,
+                   "visible": false,
+                   "searchable": false
+               }
 
-             {
-                 "targets": 5,
-                 "data": null,
-                 "defaultContent": "<button id='btn_EditMessage'>Edit</button> | <button id='btn_DeleteMessage'>Delete</button>"
-             } ]
+
+           ]
          });
 
         $('#dataTables tbody').on( 'click', '#btn_EditMessage', function () {
@@ -75,16 +77,13 @@
 
                                         <table width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" id="dataTables" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;">
                                             <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Message Type</th>
-                                                <th>Message</th>
-                                                <th>Updated By</th>
-                                                <th>Updated On</th>
-                                                <th>Option</th>
-
-
-                                            </tr>
+                                            <th>ID</th>
+                                            <th>Message Type</th>
+                                            <th>Message Intro</th>
+                                            <th>Message</th>
+                                            <th>Changed By</th>
+                                            <th>Update Time</th>
+                                            <th>Option</th>
                                             </thead>
                                         </table>
                                     </div>

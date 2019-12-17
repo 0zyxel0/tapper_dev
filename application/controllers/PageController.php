@@ -750,6 +750,7 @@ class PageController extends CI_Controller {
 			$data[] = array(
                 $r->Id,
 				$r->Type,
+				$r->Intro,
 				$r->Text,
 				$r->By,
 				$r->date

@@ -848,9 +848,10 @@ public function ctl_buildSmsNotification(){
             $data=$this->DataModel->mdl_getMessageTemplate($temptype);
             $json_data = json_decode(json_encode($data),true);
             $text = $json_data[0]['msg_text'];
+            $intro = $json_data[0]['msg_intro'];
             $this->DataModel->mdl_updatePersonCampusStatusIn($cardId);
 
-            $con_msg = $timein ." , ". $fname ." , ".$gname ." ". $text;
+            $con_msg = $intro." , ". $fname ." , ".$gname ." ". $text;
 
             $post_smsPush = array(
                 'sms_to' => $num,
@@ -860,8 +861,8 @@ public function ctl_buildSmsNotification(){
                 'updatedon' =>date('Y-m-d H:i:s')
             );
 
-            $this->DataModel->mdl_addPendingSms($post_smsPush);
-            redirect(site_url('PageController/loader'));
+           $this->DataModel->mdl_addPendingSms($post_smsPush);
+           redirect(site_url('PageController/loader'));
 
         }
         elseif($ustat == 1){
@@ -869,8 +870,9 @@ public function ctl_buildSmsNotification(){
             $data=$this->DataModel->mdl_getMessageTemplate($temptype);
             $json_data = json_decode(json_encode($data),true);
             $text = $json_data[0]['msg_text'];
+            $intro = $json_data[0]['msg_intro'];
             $this->DataModel->mdl_updatePersonCampusStatusOut($cardId);
-            $con_msg = $timein ." , ". $fname ." , ".$gname ." ". $text;
+            $con_msg = $intro ." , ". $fname ." , ".$gname ." ". $text;
                 $post_smsPush = array(
                 'sms_to' => $num,
                 'message'=>$con_msg,
