@@ -75,11 +75,11 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '127.0.0.1:8080',
+	'hostname' => '127.0.0.1',
 	'username' => 'root',
-	'password' => 'tiger',
+	'password' => '',
 	'database' => 'tapper_prod',
-	'dbdriver' => 'mysql',
+	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
