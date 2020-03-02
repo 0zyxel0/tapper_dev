@@ -40,7 +40,7 @@ router.get('/whatport',timeout('7s'),(req,res)=>{
 });
 
 //Send Sms Route
-app.post('/sms/send/:mobileContact/message/:messageContent',(req,res)=>{
+router.post('/sms/send/:mobileContact/message/:messageContent',(req,res)=>{
     //var mobileContact = req.body.mobileContact;
     //var messageContent = req.body.messageContent;
 
