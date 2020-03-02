@@ -72,7 +72,7 @@ router.get('/sms/send/:mobileContact/message/:messageContent',(req,res)=>{
             modem.getNetworkSignal((response) => {
                 console.log('Network Signal : ',response);
             })
-            modem.sendSMS("09088179755", 'This is a school Tap Test!', function(response){
+            modem.sendSMS(mobileContact, messageContent, function(response){
                 console.log('message status ',response)
             }, true);
         })
