@@ -30,6 +30,61 @@ router.get('/status',timeout('5s'),(req,res)=>{
   console.log('Check Modem Status');
 });
 
+// Check what port
+router.get('/whatport',timeout('7s'),(req,res)=>{
+    console.log('Checking Port Connections.');
+    console.log('Listing Modem Port Location');
+    modem.listOpenPorts((err, result)=>{
+        console.log(err,result);
+    });
+});
+
+//Send Sms Route
+app.post('/sms/send/:mobileContact/message/:messageContent',(req,res)=>{
+    //var mobileContact = req.body.mobileContact;
+    //var messageContent = req.body.messageContent;
+
+    var mobileContact = req.params.mobileContact;
+    var messageContent = req.params.messageContent;
+
+
+    if (!modem.isOpened) {
+        modem.open(device,modemOptions, (err,result) => {
+            if(err){
+                console.log(err)
+                console.log('Closing Connection');
+            }else{
+                console.log(result)
+            }
+        })
+    } else {
+        console.log(`Serial port ${modem.port.path} is open`);
+    }
+
+    modem.on('open', (data) => {
+        modem.initializeModem((response) => {
+            console.log('response:',response)
+            /// Change the Mode of the Modem to SMS or PDU (Callback, "SMS"|"PDU")
+            modem.modemMode((response) => {console.log(response)}, "PDU")
+            modem.getModemSerial((response) => {
+                console.log(response)
+            })
+            modem.getNetworkSignal((response) => {
+                console.log('Network Signal : ',response);
+            })
+            modem.sendSMS("09088179755", 'This is a school Tap Test!', function(response){
+                console.log('message status ',response)
+            }, true);
+        })
+    });
+
+    setTimeout(() => {
+        modem.close(() => process.exit);
+    }, 5000);
+
+});
+
+
 
 
 

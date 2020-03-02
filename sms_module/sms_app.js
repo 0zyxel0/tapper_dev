@@ -90,11 +90,15 @@ app.get('/status',(req,res)=>{
 });
 
 //Send Sms Route
-app.post('/sms',(req,res)=>{
-  var mobileContact = req.body.mobileContact;
-  var messageContent = req.body.messageContent;
+app.post('/sms/send/:mobileContact/message/:messageContent',(req,res)=>{
+  //var mobileContact = req.body.mobileContact;
+  //var messageContent = req.body.messageContent;
 
-  if (!modem.isOpened) {
+    var mobileContact = req.params.mobileContact;
+    var messageContent = req.params.messageContent;
+
+
+    if (!modem.isOpened) {
     modem.open(device,modemOptions, (err,result) => {
       if(err){
         console.log(err)
