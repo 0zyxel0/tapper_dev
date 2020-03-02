@@ -7,7 +7,7 @@ const httpClient = require('urllib');
 const bodyParser = require('body-parser');
 
 //Declaring constants
-const device = 'COM5';
+const device = 'COM3';
 const modem = require('modem-commands').Modem();
 const modemOptions = {
   baudRate: 115200,
