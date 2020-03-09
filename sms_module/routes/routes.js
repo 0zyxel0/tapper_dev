@@ -45,7 +45,6 @@ router.get('/test',(req,res)=>{
     console.log('Creating Test Send.');
     try{
       modem.sendSMS("09175278188", "Test Message", function(response){
-          json.send(response);
         console.log(response)
       },true);
       modem.on('onMessageSent', (data) => {
@@ -53,7 +52,6 @@ router.get('/test',(req,res)=>{
       })
     }catch(e){
       console.log(e)
-        json.send(e);
     }
 });
 
