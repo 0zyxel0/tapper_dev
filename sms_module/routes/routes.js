@@ -48,18 +48,18 @@ router.get('/sms/send/:mobileContact/message/:messageContent',(req,res)=>{
     var messageContent = req.params.messageContent;
 
 
-    if (!modem.isOpened) {
-        modem.open(device,modemOptions, (err,result) => {
-            if(err){
-                console.log(err)
-                console.log('Closing Connection');
-            }else{
-                console.log(result)
-            }
-        })
-    } else {
-        console.log(`Serial port ${modem.port.path} is open`);
-    }
+    // if (!modem.isOpened) {
+    //     modem.open(device,modemOptions, (err,result) => {
+    //         if(err){
+    //             console.log(err)
+    //             console.log('Closing Connection');
+    //         }else{
+    //             console.log(result)
+    //         }
+    //     })
+    // } else {
+    //     console.log(`Serial port ${modem.port.path} is open`);
+    // }
 
     modem.on('open', (data) => {
         modem.initializeModem((response) => {
