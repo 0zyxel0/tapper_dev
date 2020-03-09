@@ -27,7 +27,12 @@ const modemOptions = {
 
 //Get Status of modem
 router.get('/status',timeout('5s'),(req,res)=>{
-    res.json({ a: 1 });
+    modem.initializeModem((response) => {
+
+        res.json({ modemStatus: response });
+        console.log('response:',response)
+    })
+
     console.log('Check Modem Status');
 });
 
