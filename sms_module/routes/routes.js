@@ -27,8 +27,8 @@ const modemOptions = {
 
 //Get Status of modem
 router.get('/status',timeout('5s'),(req,res)=>{
-    res.write(JSON.stringify(res));
-    console.log('Check Modem Status',res);
+    res.json({ a: 1 });
+    console.log('Check Modem Status');
 });
 
 // Check what port
