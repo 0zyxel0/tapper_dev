@@ -32,8 +32,9 @@ router.get('/status',timeout('10s'),(req,res)=>{
     })
     modem.initializeModem((response) => {
         console.log('response:',response)
+        return response;
     })
-
+    res.status(200).json({status:response})
 });
 
 // Check what port
