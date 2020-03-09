@@ -145,8 +145,9 @@ function send_bulkSms(){
         curl_setopt($ch, CURLOPT_POSTFIELDS,
             http_build_query($itexmo));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        return curl_exec ($ch);
+        curl_exec ($ch);
         curl_close ($ch);
+        return "Successfully Sent to Message Queue";
     }
 
 
