@@ -26,14 +26,14 @@ const modemOptions = {
 
 
 //Get Status of modem
-router.get('/status',timeout('5s'),(req,res)=>{
+router.get('/status',timeout('10s'),(req,res)=>{
+    modem.open(device,modemOptions, (err,result) => {
+        console.log(result)
+    })
     modem.initializeModem((response) => {
-
-        res.json({ modemStatus: response });
         console.log('response:',response)
     })
 
-    console.log('Check Modem Status');
 });
 
 // Check what port
