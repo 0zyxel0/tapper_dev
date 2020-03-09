@@ -40,6 +40,20 @@ router.get('/whatport',timeout('7s'),(req,res)=>{
     });
 });
 
+
+router.get('/test',(req,res)=>{
+    console.log('Creating Test Send.');
+    try{
+      modem.sendSMS("09175278188", "Test Message", function(response){
+          json.send(response);
+        console.log(response)
+      },true)
+    }catch(e){
+      console.log(e)
+        json.send(e);
+    }
+});
+
 //Send Sms Route
 router.get('/sms/send/:mobileContact/message/:messageContent',(req,res)=>{
     //var mobileContact = req.body.mobileContact;
@@ -48,41 +62,26 @@ router.get('/sms/send/:mobileContact/message/:messageContent',(req,res)=>{
     var mobileContact = req.params.mobileContact;
     var messageContent = req.params.messageContent;
 
+        modem.open(device, modemOptions, (err,results)=>{
+            console.log(results);
+        });
 
-    // if (!modem.isOpened) {
-    //     modem.open(device,modemOptions, (err,result) => {
-    //         if(err){
-    //             console.log(err)
-    //             console.log('Closing Connection');
-    //         }else{
-    //             console.log(result)
-    //         }
-    //     })
-    // } else {
-    //     console.log(`Serial port ${modem.port.path} is open`);
-    // }
+        modem.initializeModem((response) => {
+            console.log(response)
+        })
 
+        modem.getModemSerial((response) => {
+            console.log(response)
+        })
 
         modem.initializeModem((response) => {
             console.log('response:',response)
             /// Change the Mode of the Modem to SMS or PDU (Callback, "SMS"|"PDU")
             modem.modemMode((response) => {console.log(response)}, "PDU")
-            // modem.getModemSerial((response) => {
-            //     console.log(response)
-            // })
-            // modem.getNetworkSignal((response) => {
-            //     console.log('Network Signal : ',response);
-            // })
             modem.sendSMS(mobileContact, messageContent, function(response){
                 console.log('message status ',response)
             }, true);
         });
-
-
-    // setTimeout(() => {
-    //     modem.close(() => process.exit);
-    // }, 5000);
-
 });
 
 
