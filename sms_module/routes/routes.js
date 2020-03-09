@@ -61,7 +61,7 @@ router.get('/sms/send/:mobileContact/message/:messageContent',(req,res)=>{
     //     console.log(`Serial port ${modem.port.path} is open`);
     // }
 
-    modem.on('open', (data) => {
+
         modem.initializeModem((response) => {
             console.log('response:',response)
             /// Change the Mode of the Modem to SMS or PDU (Callback, "SMS"|"PDU")
@@ -75,8 +75,8 @@ router.get('/sms/send/:mobileContact/message/:messageContent',(req,res)=>{
             modem.sendSMS(mobileContact, messageContent, function(response){
                 console.log('message status ',response)
             }, true);
-        })
-    });
+        });
+
 
     // setTimeout(() => {
     //     modem.close(() => process.exit);
