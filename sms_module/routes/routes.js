@@ -66,21 +66,21 @@ router.get('/sms/send/:mobileContact/message/:messageContent',(req,res)=>{
             console.log('response:',response)
             /// Change the Mode of the Modem to SMS or PDU (Callback, "SMS"|"PDU")
             modem.modemMode((response) => {console.log(response)}, "PDU")
-            modem.getModemSerial((response) => {
-                console.log(response)
-            })
-            modem.getNetworkSignal((response) => {
-                console.log('Network Signal : ',response);
-            })
+            // modem.getModemSerial((response) => {
+            //     console.log(response)
+            // })
+            // modem.getNetworkSignal((response) => {
+            //     console.log('Network Signal : ',response);
+            // })
             modem.sendSMS(mobileContact, messageContent, function(response){
                 console.log('message status ',response)
             }, true);
         })
     });
 
-    setTimeout(() => {
-        modem.close(() => process.exit);
-    }, 5000);
+    // setTimeout(() => {
+    //     modem.close(() => process.exit);
+    // }, 5000);
 
 });
 
