@@ -47,7 +47,10 @@ router.get('/test',(req,res)=>{
       modem.sendSMS("09175278188", "Test Message", function(response){
           json.send(response);
         console.log(response)
-      },true)
+      },true);
+      modem.on('onMessageSent', (data) => {
+           console.log(data)
+      })
     }catch(e){
       console.log(e)
         json.send(e);
