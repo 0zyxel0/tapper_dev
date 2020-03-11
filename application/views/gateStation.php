@@ -50,7 +50,7 @@
             }
             var sendSMSNotification= function(){
                 $.ajax({
-                    url: "<?php echo site_url('DataController/ctl_buildSmsNotification'); ?>",
+                    url: "<?php echo site_url('DataController/ctl_createSmsNotification'); ?>",
                     type: 'POST',
                     cache: false,
                     async: false,
@@ -87,7 +87,7 @@
                 });
                 hideDetails();
                 setTimeout(reloadIFrame(), 4000);
-                //call reload for the whole page...what i need to do it call the timer after 4 seconds or if someone taps again it cancels the timer and 
+                //call reload for the whole page...what i need to do it call the timer after 4 seconds or if someone taps again it cancels the timer and
                 $('#dataTables').DataTable().ajax.reload();
                // setTimeout(reload_page(), 4000);
             }

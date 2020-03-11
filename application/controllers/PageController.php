@@ -893,6 +893,7 @@ class PageController extends CI_Controller {
 
     }
 
+		//View Page of the gate UI
     public function gate(){
         $this->load->helper('url');
         $data['logo'] = $this->DataModel->mdl_getSystemGateLogo();

@@ -823,7 +823,9 @@ class DataController extends CI_Controller{
 
 
     }
-
+//With Gsm module function
+// This code checks the cardID and then pulls the record from the database.
+// When the data is ready it will be queuing the msg to the msg database and wait until it it picked up by the process
 public function ctl_buildSmsNotification(){
     $this->load->helper('url');
     $cardId =$this->input->post('crdScanned');
@@ -888,6 +890,82 @@ public function ctl_buildSmsNotification(){
  redirect(site_url('PageController/loader'));
 }
 //Contact List
+
+
+
+//Function will be working with the 3rd party API that is itexmo
+//This function just gets the post data from the card scan and then sends the data to the API of ItextMo using internet.
+//Internet is needed for this to work.
+
+public function ctl_createSmsNotification(){
+  $this->load->helper('url');
+  $cardId =$this->input->post('crdScanned');
+  $data = $this->DataModel->mdl_getGuardianNumber($cardId);
+  $data2 = $this->DataModel->mdl_studentFamilyname($cardId);
+  $data3 = $this->DataModel->mdl_studentGivenname($cardId);
+  $status =  $this->DataModel->mdl_checkPersonCampusStatus($cardId);
+  $json_data = json_decode(json_encode($data),true);
+  $json_data2 = json_decode(json_encode($data2),true);
+  $json_data3 = json_decode(json_encode($data3),true);
+  $json_status =  json_decode(json_encode($status),true);
+  $num = $json_data[0]['contactNumber'];
+  $fname = $json_data2[0]['familyname'];
+  $gname = $json_data3[0]['givenname'];
+  $ustat = $json_status[0]['campus_status'];
+  $timein = date('Y-m-d H:i:s');
+
+      if($ustat == 0)
+      {
+          $temptype = 1;
+          $data=$this->DataModel->mdl_getMessageTemplate($temptype);
+          $json_data = json_decode(json_encode($data),true);
+          $text = $json_data[0]['msg_text'];
+          $intro = $json_data[0]['msg_intro'];
+          $this->DataModel->mdl_updatePersonCampusStatusIn($cardId);
+
+          $con_msg = $intro." , ". $fname ." , ".$gname ." ". $text;
+
+          $ch = curl_init();
+          $itexmo = array('1' => $num
+                          ,'2' => $con_msg
+                          ,'3' => 'TR-SCRIB278188_KDXWC');
+
+          curl_setopt($ch, CURLOPT_URL,"https://www.itexmo.com/php_api/api.php");
+          curl_setopt($ch, CURLOPT_POST, 1);
+          curl_setopt($ch, CURLOPT_POSTFIELDS,
+              http_build_query($itexmo));
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_exec($ch);
+          curl_close($ch);
+
+      }
+      elseif($ustat == 1){
+          $temptype = 2;
+          $data=$this->DataModel->mdl_getMessageTemplate($temptype);
+          $json_data = json_decode(json_encode($data),true);
+          $text = $json_data[0]['msg_text'];
+          $intro = $json_data[0]['msg_intro'];
+          $this->DataModel->mdl_updatePersonCampusStatusOut($cardId);
+          $con_msg = $intro ." , ". $fname ." , ".$gname ." ". $text;
+
+          $ch = curl_init();
+          $itexmo = array('1' => $num
+                          ,'2' => $con_msg
+                          ,'3' => 'TR-SCRIB278188_KDXWC');
+
+          curl_setopt($ch, CURLOPT_URL,"https://www.itexmo.com/php_api/api.php");
+          curl_setopt($ch, CURLOPT_POST, 1);
+          curl_setopt($ch, CURLOPT_POSTFIELDS,
+              http_build_query($itexmo));
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_exec($ch);
+          curl_close($ch);
+      }
+}
+
+
+
+
 
 public function ctl_deleteContactList(){
 
@@ -961,7 +1039,7 @@ public function ctl_getAllContactAvailable($id=null){
        $r->familyname,
        $r->givenname,
        $r->mobile_number,
-    
+
     );
   }
 //var_dump($data);

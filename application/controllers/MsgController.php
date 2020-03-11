@@ -71,7 +71,7 @@ function send_SingleSms_Phone(){
 
 //Execute the request
    curl_exec($ch);
-   
+
 }
 function send_SingleSms_Semaphore(){
 
@@ -133,11 +133,14 @@ function send_bulkSms(){
 }
 
 
-    function itexmo_sendSingleSms($number,$stdName,$message){
-
+    function itexmo_sendSingleSms(){
+        $NumberTo = $this->input->post('NumberTo');
+        $message= $this->input->post('message');
+        $name = $this->input->post('StudentNames');
+        $con_msg = $name ." ". $message;
         $ch = curl_init();
-        $itexmo = array('1' => $number
-                        ,'2' => $message.' '.$stdName
+        $itexmo = array('1' => $NumberTo
+                        ,'2' => $con_msg
                         ,'3' => 'TR-SCRIB278188_KDXWC');
 
         curl_setopt($ch, CURLOPT_URL,"https://www.itexmo.com/php_api/api.php");
@@ -146,8 +149,7 @@ function send_bulkSms(){
             http_build_query($itexmo));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_exec($ch);
-         curl_close($ch);
-         return "Queued Message.";
+        curl_close($ch);
 
     }
 
