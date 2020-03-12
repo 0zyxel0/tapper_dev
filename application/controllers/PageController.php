@@ -887,11 +887,11 @@ class PageController extends CI_Controller {
 
 	}
 
-    public function station(){
-        $this->load->helper('url');
-        $this->load->view('scanningStation');
-
-    }
+    // public function station(){
+    //     $this->load->helper('url');
+    //     $this->load->view('scanningStation');
+		//
+    // }
 
 		//View Page of the gate UI
     public function gate(){
@@ -907,11 +907,11 @@ class PageController extends CI_Controller {
 
     }
 
-	public function test(){
-		$this->load->helper('url');
-		$this->load->view('userScan');
-
-	}
+	// public function test(){
+	// 	$this->load->helper('url');
+	// 	$this->load->view('userScan');
+	//
+	// }
 //Iframe in gateScanner
     public function loader(){
         $this->load->helper('url');
