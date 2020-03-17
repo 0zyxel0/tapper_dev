@@ -1042,7 +1042,6 @@ public function ctl_getAllContactAvailable($id=null){
 
     );
   }
-//var_dump($data);
   $output = array(
     "draw" => $draw,
     "recordsTotal" => $dataList->num_rows(),
@@ -1074,6 +1073,13 @@ public function ctl_getAllContactAvailable($id=null){
             'gate_id'=>$stationId
             );
            $this->DataModel->insertCardHistoryDetails($post_cardData);
+
+           $data = $this->DataModel->mdl_extractUserDetails($cardId);
+
+           return $this->output
+                ->set_content_type('application/json')
+                ->set_status_header(200)
+                ->set_output(json_encode($data));
 
         }
     }
@@ -1203,12 +1209,20 @@ public function ctl_getAllContactAvailable($id=null){
         }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
-
-
-
-
-
-
-
 ?>

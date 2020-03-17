@@ -85,8 +85,6 @@ class PageController extends CI_Controller {
     }
 
 
-
-
 //not used
 
 
@@ -898,7 +896,20 @@ class PageController extends CI_Controller {
         $this->load->helper('url');
         $data['logo'] = $this->DataModel->mdl_getSystemGateLogo();
         $data['background'] = $this->DataModel->mdl_getGateBackground();
+        $data['history'] = $this->DataModel->mdl_get_topFiveScanHistory();
 		$this->load->view('gateStation',$data);
+    }
+
+    //IFrame for the timeline History
+    public function ctl_gateTimelineHistory(){
+        $data['history'] = $this->DataModel->mdl_get_topFiveScanHistory();
+        $this->load->view('v_gateTimelineHistory',$data);
+    }
+
+
+    public function testHistory(){
+        $data = $this->DataModel->mdl_get_topFiveScanHistory();
+	    echo json_encode($data);
     }
 
     public function ErrorPage(){

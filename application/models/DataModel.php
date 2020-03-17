@@ -655,6 +655,19 @@ class DataModel extends CI_Model{
     }
 
 
+    public function mdl_get_topFiveScanHistory(){
+        $query = $this->db->query("call fn_ImageGateHistory()");
+        return $query->result();
+
+    }
+
+    public function mdl_extractUserDetails($cardId){
+        $query = $this->db->query("call fn_ExtractGateUserDetail(?)", array($cardId));
+        return $query->result();
+
+    }
+
+
     //not used scripts
     //
     //

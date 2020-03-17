@@ -30,7 +30,7 @@
                 </button>
                 <div class="col">
                     <div class="headerDiv">
-                        <a class="navbar-brand" href="<?php echo base_url(); ?>"></a>
+                        <a class="navbar-brand" href="javascript:window.location.href=window.location.href"></a>
                     </div>
                 </div>
 
