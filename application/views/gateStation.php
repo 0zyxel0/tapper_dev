@@ -25,7 +25,7 @@
             $('#cardScan').on('submit',function(e){
                 var post_data1 = $('#crdScanned').val();
                 var post_data2 = $('#gateStationId').val();
-
+				console.log(post_data1);
                 $.ajax({
                     url: "<?php echo site_url('DataController/checkCardDetails'); ?>",
                     type: 'POST',
@@ -34,6 +34,7 @@
                         gateStationId: post_data2
                     }, // This is all you have to change
                     success: function (data) {
+						console.log(data);
                         $('#crdScanned').val('');
                        var userData = data[0];
                        var db_image_path =userData.image_url;
@@ -48,8 +49,7 @@
                             clearScannedDetails();
                         }  , 1000 );
                     }
-                
-				}
+                }
                   
 
             );
@@ -64,7 +64,6 @@
                     url: "<?php echo site_url('DataController/ctl_createSmsNotification'); ?>",
                     type: 'POST',
                     cache: false,
-                    async: false,
                     data: { crdScanned: post_data1
                     }, // This is all you have to change
                     success: function (data) {
