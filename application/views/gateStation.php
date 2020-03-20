@@ -49,7 +49,7 @@
                         }  , 1000 );
                     }
                 }
-                 // sendSmsNotification(post_data1);
+                  sendSmsNotification(post_data1);
 
             );
 
