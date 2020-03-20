@@ -48,11 +48,12 @@
                             clearScannedDetails();
                         }  , 1000 );
                     }
-                }
-                  sendSmsNotification(post_data1);
+                
+				}
+                  
 
             );
-
+				sendSmsNotification(post_data1);
                 reload_gateTimelineHistory();
                 return false;
 
