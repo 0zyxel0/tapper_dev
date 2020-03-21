@@ -15,12 +15,8 @@
     <?php require('ScriptBundle.php')?>
     <script type="text/javascript">
         $(document).ready(function() {
-
             var dt = new Date();
             var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-
-
-
             $('#changing').css('opacity', 0);
             $('#cardScan').on('submit',function(e){
                 var post_data1 = $('#crdScanned').val();
@@ -47,16 +43,13 @@
                         setTimeout( function(){
                             hideScannedDetails();
                             clearScannedDetails();
-                        }  , 1000 );
+                        }  , 1500 );
+                        reload_gateTimelineHistory();
                     }
                 }
-                  
-
             );
 				sendSmsNotification(post_data1);
-                reload_gateTimelineHistory();
                 return false;
-
             });
 
             function sendSmsNotification(post_data1){
@@ -89,7 +82,9 @@
 
 
             function reload_gateTimelineHistory(){
+                setTimeout( function(){
                 document.getElementById('gateIframe').contentWindow.location.reload();
+                }  , 500 );
             }
 
 
