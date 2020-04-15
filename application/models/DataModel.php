@@ -85,6 +85,14 @@ class DataModel extends CI_Model{
                                 return $query->result();
     }
 
+    //This function pulls contact list data from the database.
+    function mdl_getAllContactLists(){
+        $query = $this->db->query("SELECT contactlistid, contactlist_name 
+                                   FROM contactlist 
+                                   WHERE isDisabled = 0");
+        return $query->result();
+    }
+
 
 
     function mdl_GetGuardianList(){
@@ -717,6 +725,17 @@ class DataModel extends CI_Model{
 
     function addUserToContactList($postData){
       $this->db->insert('contactlist_users',$postData);
+    }
+
+    //This function gets all student contacts numbers for announcement purposes.
+    function mdl_getAllStudentsContact(){
+        $query = $this->db->query('SELECT givenname, familyname, mobile_number 
+                                   FROM gate_persondetails gp
+                                   LEFT JOIN gate_categorytype gc on gp.categoryId = gc.categoryId
+                                   WHERE gc.categoryId = "77f9afea-c316-11e8-a587-ace2d3624318"
+                                   ');
+        $query->result_array();
+        return $query;
     }
 
 

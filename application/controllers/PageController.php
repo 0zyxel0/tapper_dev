@@ -85,22 +85,20 @@ class PageController extends CI_Controller {
     }
 
 
-//not used
 
-
-	function show_list_data()
-	{
-		// load table library
-		$this->load->library('table');
-		// set heading
-		$this->table->set_heading('image_url', 'ID Number', 'createDate','card_id');
-		// set template
-		$style = array('table_open'  => '<table class="table table-striped table-hover">');
-		$this->table->set_template($style);
-		$this->load->model("DataModel");
-		$data["getTopGateScan"] = $this->DataModel->getTopGateScan();
-		echo $this->table->generate($data["getTopGateScan"]);
-	}
+//	function show_list_data()
+//	{
+//		// load table library
+//		$this->load->library('table');
+//		// set heading
+//		$this->table->set_heading('image_url', 'ID Number', 'createDate','card_id');
+//		// set template
+//		$style = array('table_open'  => '<table class="table table-striped table-hover">');
+//		$this->table->set_template($style);
+//		$this->load->model("DataModel");
+//		$data["getTopGateScan"] = $this->DataModel->getTopGateScan();
+//		echo $this->table->generate($data["getTopGateScan"]);
+//	}
 
 
 	public function broadcast()
@@ -110,27 +108,32 @@ class PageController extends CI_Controller {
 
 	}
 
-	public function broadcastTeacher()
-	{
-		$this->load->helper('url');
-		$this->load->view('announcementPageTeach');
+//	public function broadcastTeacher()
+//	{
+//		$this->load->helper('url');
+//		$this->load->view('announcementPageTeach');
+//
+//	}
+//
+//	public function broadcastAll()
+//	{
+//		$this->load->helper('url');
+//		$this->load->view('announcementPageAll');
+//
+//	}
+//
+//
+//	public function broadcastGuardian()
+//	{
+//		$this->load->helper('url');
+//		$this->load->view('announcementPageGuardian');
+//
+//	}
 
-	}
-
-	public function broadcastAll()
-	{
-		$this->load->helper('url');
-		$this->load->view('announcementPageAll');
-
-	}
 
 
-	public function broadcastGuardian()
-	{
-		$this->load->helper('url');
-		$this->load->view('announcementPageGuardian');
 
-	}
+
 
 
 	public function broadcastToList(){
@@ -733,6 +736,8 @@ class PageController extends CI_Controller {
 
 
 
+
+
 	function ctl_GetMsgTemplateList(){
 		// Datatables Variables
 		$draw = intval($this->input->get("draw"));
@@ -885,11 +890,6 @@ class PageController extends CI_Controller {
 
 	}
 
-    // public function station(){
-    //     $this->load->helper('url');
-    //     $this->load->view('scanningStation');
-		//
-    // }
 
 		//View Page of the gate UI
     public function gate(){
@@ -918,11 +918,7 @@ class PageController extends CI_Controller {
 
     }
 
-	// public function test(){
-	// 	$this->load->helper('url');
-	// 	$this->load->view('userScan');
-	//
-	// }
+
 //Iframe in gateScanner
     public function loader(){
         $this->load->helper('url');
@@ -949,6 +945,15 @@ public function manageUserContactList(){
 
 
 
+
+    public function view_newAnnouncementPage(){
+
+        $this->load->helper('url');
+        $data['lists'] = $this->DataModel->mdl_getBulkContactList();
+        $data['students']= $this->DataModel->mdl_getAllStudentsContact();
+        $this->load->view('v_newAnnouncementPage',$data);
+
+    }
 
 
 

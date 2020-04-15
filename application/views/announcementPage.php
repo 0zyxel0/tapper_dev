@@ -23,7 +23,7 @@
 
     <div id="wrapper">
         <?php require('navBar.php')?>
-        <?php require('p.announcementBody.php')?>
+
         <!-- Page Content -->
         
                 <!-- /.container-fluid -->

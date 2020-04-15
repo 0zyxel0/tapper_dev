@@ -68,16 +68,7 @@
                             </a>
 
                             <ul class="nav nav-list collapse" id="submenu1">
-                                <li>
-                                    <a class="accordion-heading" data-toggle="collapse" data-target="#submenu2" href="<?php echo base_url(); ?>PageController/msgTemplates">Message Templates</a>
-                                </li>
-                                    <li><a class="accordion-heading" data-toggle="collapse" data-target="#submenu2" href="<?php echo base_url(); ?>PageController/broadcast">Send To All Students</a></li>
-                                    <li><a class="accordion-heading" data-toggle="collapse" data-target="#submenu2" href="<?php echo base_url(); ?>PageController/broadcastTeacher">Send To All Teachers</a></li>
-                                    <li><a class="accordion-heading" data-toggle="collapse" data-target="#submenu2" href="<?php echo base_url(); ?>PageController/broadcastAll">Send To All</a></li>
-                                    <li><a class="accordion-heading" data-toggle="collapse" data-target="#submenu2" href="<?php echo base_url(); ?>PageController/broadcastGuardian">Send To All Guardians</a></li>
-                                    <li><a class="accordion-heading" data-toggle="collapse" data-target="#submenu2" href="<?php echo base_url(); ?>PageController/broadcastToList">Send To Contact List</a></li>
-                                    <li><a class="accordion-heading" data-toggle="collapse" data-target="#submenu2" href="<?php echo base_url(); ?>PageController/manageUserContactList">Manage Contact List</a></li>
-
+                               <li><a class="accordion-heading" data-toggle="collapse" data-target="#submenu2" href="<?php echo base_url(); ?>PageController/view_newAnnouncementPage">Create New Announcement</a></li>
                             </ul>
                         </li>
                         <li>
@@ -100,9 +91,16 @@
                         </li>
                         <li>
                             <a href="<?php echo base_url(); ?>PageController/sysSettings"><i class="fa fa-cogs fa-fw"></i>System Setup<span class="fa arrow"></span></a>
+                        <li>
+                            <a class="accordion-heading" data-toggle="collapse" data-target="#submenu2"><i class="glyphicon glyphicon-volume-up"></i><span class="nav-header-primary">Message Settings<span class="pull-right"><b class="caret"></b></span></span>
+                            </a>
+                            <ul class="nav nav-list collapse" id="submenu2">
+                                <li>
+                                    <a class="accordion-heading" data-toggle="collapse" data-target="#submenu2" href="<?php echo base_url(); ?>PageController/msgTemplates">Message Templates</a>
+                                </li>
+                                <li><a class="accordion-heading" data-toggle="collapse" data-target="#submenu2" href="<?php echo base_url(); ?>PageController/manageUserContactList">Manage Contact List</a></li>
+                            </ul>
                         </li>
-
-
                     </ul>
                 </div>
             </div>
