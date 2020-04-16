@@ -374,7 +374,7 @@ class DataModel extends CI_Model{
         $query = $this->db->query("select
                                     messageId AS 'Id',                                  
                                     message_type AS 'Type',
-                                    message_intro AS 'Intro',                                
+                                    msg_intro AS 'Intro',                                
                                     msg_text AS 'Text',
                                     updatedBy As 'By',
                                     updateDate as 'date'

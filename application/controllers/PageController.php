@@ -741,15 +741,9 @@ class PageController extends CI_Controller {
 	function ctl_GetMsgTemplateList(){
 		// Datatables Variables
 		$draw = intval($this->input->get("draw"));
-		$start = intval($this->input->get("start"));
-		$length = intval($this->input->get("length"));
-
-
 		$x = $this->DataModel->mdl_GetMsgTemplateList();
 		$data = array();
-
 		foreach($x->result() as $r) {
-
 			$data[] = array(
                 $r->Id,
 				$r->Type,
@@ -759,15 +753,10 @@ class PageController extends CI_Controller {
 				$r->date,
 			);
 		}
-
 		$output = array(
-			"draw" => $draw,
-			"recordsTotal" => $x->num_rows(),
-			"recordsFiltered" => $x->num_rows(),
-			"data" => $data
+	"data" => $data
 		);
 		echo json_encode($output);
-
 	}
 
 
