@@ -756,7 +756,7 @@ class PageController extends CI_Controller {
 				$r->Intro,
 				$r->Text,
 				$r->By,
-				$r->date
+				$r->date,
 			);
 		}
 

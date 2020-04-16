@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <title> Gate </title>
 
 
 
@@ -57,8 +58,7 @@
                     url: "<?php echo site_url('DataController/ctl_createSmsNotification'); ?>",
                     type: 'POST',
                     cache: false,
-                    data: { crdScanned: post_data1
-                    }, // This is all you have to change
+                    data: { crdScanned: post_data1}, // This is all you have to change
                     success: function (data) {
                         console.log(data);
                     }

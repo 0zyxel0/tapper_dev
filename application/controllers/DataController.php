@@ -2,10 +2,19 @@
 
 class DataController extends CI_Controller{
 
+
+
+
+
+
     function __construct() {
         parent::__construct();
         $this->load->model('DataModel');
     }
+
+
+
+
 
     function generateCategoryData(){
         $this->load->helper('url');
@@ -864,21 +873,21 @@ public function ctl_buildSmsNotification(){
 //Internet is needed for this to work.
 
 public function ctl_createSmsNotification(){
+
+    //GLOBAL VARIABLES FOR 3RD PARTY API
+     $itextmo_token = 'TR-CALVI573914_DBR92';
+     $itextmo_pwd = '}13]t}jp68';
+
   $this->load->helper('url');
   $cardId =$this->input->post('crdScanned');
-  $data = $this->DataModel->mdl_getGuardianNumber($cardId);
-  $data2 = $this->DataModel->mdl_studentFamilyname($cardId);
-  $data3 = $this->DataModel->mdl_studentGivenname($cardId);
+  $details = $this->DataModel->mdl_getStudentGuardianContact($cardId);
   $status =  $this->DataModel->mdl_checkPersonCampusStatus($cardId);
-  $json_data = json_decode(json_encode($data),true);
-  $json_data2 = json_decode(json_encode($data2),true);
-  $json_data3 = json_decode(json_encode($data3),true);
+  $json_data = json_decode(json_encode($details),true);
   $json_status =  json_decode(json_encode($status),true);
   $num = $json_data[0]['contactNumber'];
-  $fname = $json_data2[0]['familyname'];
-  $gname = $json_data3[0]['givenname'];
+  $fname = $json_data[0]['familyname'];
+  $gname = $json_data[0]['givenname'];
   $ustat = $json_status[0]['campus_status'];
-  $timein = date('Y-m-d H:i:s');
 
       if($ustat == 0)
       {
@@ -889,12 +898,13 @@ public function ctl_createSmsNotification(){
           $intro = $json_data[0]['msg_intro'];
           $this->DataModel->mdl_updatePersonCampusStatusIn($cardId);
 
-          $con_msg = $intro." , ". $fname ." , ".$gname ." ". $text;
+          $con_msg = $intro." ". $fname ." , ".$gname ." ". $text;
 
           $ch = curl_init();
           $itexmo = array('1' => $num
-                          ,'2' => $con_msg
-                          ,'3' => 'TR-SCRIB278188_KDXWC');
+          ,'2' => $con_msg
+          ,'3' => $itextmo_token
+          ,'passwd' => $itextmo_pwd);
 
           curl_setopt($ch, CURLOPT_URL,"https://www.itexmo.com/php_api/api.php");
           curl_setopt($ch, CURLOPT_POST, 1);
@@ -903,7 +913,8 @@ public function ctl_createSmsNotification(){
           curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
           curl_exec($ch);
           curl_close($ch);
-
+          unset($itexmo);
+          echo $con_msg;
       }
       elseif($ustat == 1){
           $temptype = 2;
@@ -912,12 +923,14 @@ public function ctl_createSmsNotification(){
           $text = $json_data[0]['msg_text'];
           $intro = $json_data[0]['msg_intro'];
           $this->DataModel->mdl_updatePersonCampusStatusOut($cardId);
-          $con_msg = $intro ." , ". $fname ." , ".$gname ." ". $text;
+
+          $con_msg = $intro." ". $fname ." , ".$gname ." ". $text;
 
           $ch = curl_init();
           $itexmo = array('1' => $num
-                          ,'2' => $con_msg
-                          ,'3' => 'TR-SCRIB278188_KDXWC');
+          ,'2' => $con_msg
+          ,'3' => $itextmo_token
+          ,'passwd' => $itextmo_pwd);
 
           curl_setopt($ch, CURLOPT_URL,"https://www.itexmo.com/php_api/api.php");
           curl_setopt($ch, CURLOPT_POST, 1);
@@ -926,6 +939,8 @@ public function ctl_createSmsNotification(){
           curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
           curl_exec($ch);
           curl_close($ch);
+          unset($itexmo);
+          echo $con_msg;
       }
 }
 
@@ -1043,7 +1058,11 @@ public function ctl_createSmsNotification(){
 
     //This function sends the bulk  SMS curl command to the ITEXTMO SMS API
     public function sendBulkSMSMessage(){
-        $token = 'TR-SCRIB278188_KDXWC';
+
+        //GLOBAL VARIABLES FOR 3RD PARTY API
+        $itextmo_token = 'TR-CALVI573914_DBR92';
+        $itextmo_pwd = '}13]t}jp68';
+
         $listid =$this->input->post('contactListId');
         $postMsg = $this->input->post('message');
         $data = $this->DataModel->mdl_getContactNumbers($listid);
@@ -1052,7 +1071,8 @@ public function ctl_createSmsNotification(){
         foreach ($json as $item) {
             $res_arr_values[] = array('1' => $item["mobile_number"]
                                      ,'2' => $postMsg
-                                     ,'3' => $token);
+                                     ,'3' => $itextmo_token
+                                     ,'passwd' => $itextmo_pwd);
                                 }
             foreach ($res_arr_values as $sms_curl){
                     try{
@@ -1063,11 +1083,14 @@ public function ctl_createSmsNotification(){
                         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                         curl_exec($ch);
                         curl_close($ch);
+
                     }
                     catch(Exception $e){
                         echo 'Caught exception: ',  $e->getMessage(), "\n";
                     }
                 }
+
+        unset($res_arr_values);
         }
 
 

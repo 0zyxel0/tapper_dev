@@ -374,7 +374,7 @@ class DataModel extends CI_Model{
         $query = $this->db->query("select
                                     messageId AS 'Id',                                  
                                     message_type AS 'Type',
-                                    msg_intro AS 'Intro',
+                                    message_intro AS 'Intro',                                
                                     msg_text AS 'Text',
                                     updatedBy As 'By',
                                     updateDate as 'date'
@@ -382,6 +382,7 @@ class DataModel extends CI_Model{
         $query->row();
         return $query;
     }
+
 
     function updateUserPhotoFile($imgData){
         extract($imgData);
@@ -550,7 +551,7 @@ class DataModel extends CI_Model{
     }
 
     public function mdl_getMessageTemplate($temptype){
-        $query = $this->db->query("select msg_text
+        $query = $this->db->query("select msg_text, msg_intro
                                    from msg_template
                                    where message_type = '$temptype'
                                    LIMIT 1
@@ -562,7 +563,6 @@ class DataModel extends CI_Model{
         $query = $this->db->query("select campus_status
                                    from gate_personstatus
                                    where card_id = '$postData'
-
                                     ");
         return  $query->result();
     }
@@ -661,6 +661,21 @@ class DataModel extends CI_Model{
         return  $query->result();
 
     }
+
+
+    public function mdl_getStudentGuardianContact($cardId){
+        $query = $this->db->query("SELECT pd.givenname, pd.familyname,ec.contactNumber
+                                   FROM gate_cardassignment ca
+                                   LEFT JOIN gate_persondetails pd on pd.personDetailId = ca.partyid
+                                   LEFT JOIN user_emergencycontact ec on ec.personDetailId = pd.personDetailId
+                                   WHERE ca.card_id = '$cardId'
+                                   LIMIT 1
+                                  ");
+        return  $query->result();
+    }
+
+
+
 
 
     public function mdl_get_topFiveScanHistory(){

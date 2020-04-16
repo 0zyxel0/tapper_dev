@@ -1,30 +1,12 @@
 <script type= 'text/javascript'>
     $(document).ready(function() {
-       /* $('#dataTables').DataTable({
-            "ajax": {
-                url : "<!--?php echo site_url("PageController/ReportDataTable") ?-->",
-                type : 'GET'
-            }
-        });*/
+
 
        var table =  $('#dataTables').DataTable({
          "ajax": {
          url : "<?php echo site_url("PageController/ctl_GetMsgTemplateList") ?>",
          type : 'GET'
-         },"columnDefs":[
-               {
-                   "targets": 2,
-                   "visible": false,
-                   "searchable": false
-               },
-               {
-                   "targets": 6,
-                   "visible": false,
-                   "searchable": false
-               }
-
-
-           ]
+         }
          });
 
         $('#dataTables tbody').on( 'click', '#btn_EditMessage', function () {
@@ -32,7 +14,7 @@
             var data = table.row( $(this).parents('tr') ).data();
             $('#msgId').attr('value', data[0]);
             $('#msgType').attr('value', data[1]);
-            $('#msgTxt').val(data[2]);
+            $('#msgTxt').val(data[3]);
 
         } );
 
@@ -41,7 +23,7 @@
             var data = table.row( $(this).parents('tr') ).data();
             $('#dlt_msgId').attr('value', data[0]);
             $('#dlt_msgType').attr('value', data[1]);
-            $('#dlt_msgTxt').val(data[2]);
+            $('#dlt_msgTxt').val(data[3]);
 
         } );
 
