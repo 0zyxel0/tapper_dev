@@ -1091,7 +1091,7 @@ public function ctl_createSmsNotification(){
                 }
 
         unset($res_arr_values);
-        redirect(site_url('PageController/view_newAnnouncementPage').$listid);
+        redirect(site_url('PageController/view_newAnnouncementPage'));
         }
 
 

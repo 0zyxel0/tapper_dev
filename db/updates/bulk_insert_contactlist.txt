@@ -1,0 +1,59 @@
+SELECT COUNT(*) FROM contactlist WHERE contactlist_name in ('All Students', 'All Teachers','Staff and Students');
+
+INSERT INTO contactlist (contactlist_name,isDisabled,createdby,createdon,updatedby,updatedon)
+VALUES ('All Students',0,'Admin',now(),'Admin',now());
+
+INSERT INTO contactlist (contactlist_name,isDisabled,createdby,createdon,updatedby,updatedon)
+VALUES ('All Teachers',0,'Admin',now(),'Admin',now());
+
+INSERT INTO contactlist (contactlist_name,isDisabled,createdby,createdon,updatedby,updatedon)
+VALUES ('Staff and Students',0,'Admin',now(),'Admin',now());
+
+
+SELECT COUNT(*) FROM contactlist WHERE contactlist_name in ('All Students', 'All Teachers','Staff and Students');
+
+INSERT INTO contactlist_users(contactlistid, personDetailId, mobile_number,isDisabled,createdBy,createdon,updatedby,updatedon)
+SELECT 
+(SELECT contactlistid FROM contactlist WHERE contactlist_name = 'All Students') as 'contactlistid'
+,gp.personDetailId
+, gp.mobile_number
+, gc.isDisabled
+,'System Generated' AS createdby
+,now() as 'createdon'
+,'System Generated' as updatedby
+,now() as 'updatedon'
+FROM gate_persondetails gp
+LEFT JOIN gate_cardassignment gc on gc.partyId = gp.personDetailId
+LEFT JOIN gate_categorytype gt on gp.categoryId = gt.categoryId
+WHERE gc.isDisabled = 0
+AND gt.categoryName = 'Student'
+
+INSERT INTO contactlist_users(contactlistid, personDetailId, mobile_number,isDisabled,createdBy,createdon,updatedby,updatedon)
+SELECT 
+(SELECT contactlistid FROM contactlist WHERE contactlist_name = 'All Teachers') as 'contactlistid'
+,gp.personDetailId
+, gp.mobile_number
+, gc.isDisabled
+,'System Generated' AS createdby
+,now() as 'createdon'
+,'System Generated' as updatedby
+,now() as 'updatedon'
+FROM gate_persondetails gp
+LEFT JOIN gate_cardassignment gc on gc.partyId = gp.personDetailId
+LEFT JOIN gate_categorytype gt on gp.categoryId = gt.categoryId
+WHERE gc.isDisabled = 0
+AND gt.categoryName = 'Teacher'
+
+INSERT INTO contactlist_users(contactlistid, personDetailId, mobile_number,isDisabled,createdBy,createdon,updatedby,updatedon)
+SELECT 
+(SELECT contactlistid FROM contactlist WHERE contactlist_name = 'Staff and Students') as 'contactlistid'
+,gp.personDetailId
+, gp.mobile_number
+, gc.isDisabled
+,'System Generated' AS createdby
+,now() as 'createdon'
+,'System Generated' as updatedby
+,now() as 'updatedon'
+FROM gate_persondetails gp
+LEFT JOIN gate_cardassignment gc on gc.partyId = gp.personDetailId
+WHERE gc.isDisabled = 0
