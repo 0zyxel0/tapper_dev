@@ -875,8 +875,8 @@ public function ctl_buildSmsNotification(){
 public function ctl_createSmsNotification(){
 
     //GLOBAL VARIABLES FOR 3RD PARTY API
-     $itextmo_token = 'TR-CALVI573914_DBR92';
-     $itextmo_pwd = '}13]t}jp68';
+    $itextmo_token = 'TR-MIGUE777615_VERJL';
+     $itextmo_pwd = '[1v2hif[3b';
 
   $this->load->helper('url');
   $cardId =$this->input->post('crdScanned');
@@ -1060,8 +1060,8 @@ public function ctl_createSmsNotification(){
     public function sendBulkSMSMessage(){
 
         //GLOBAL VARIABLES FOR 3RD PARTY API
-        $itextmo_token = 'TR-CALVI573914_DBR92';
-        $itextmo_pwd = '}13]t}jp68';
+       $itextmo_token = 'TR-MIGUE777615_VERJL';
+        $itextmo_pwd = '[1v2hif[3b';
 
         $listid =$this->input->post('contactListId');
         $postMsg = $this->input->post('message');
